@@ -1,0 +1,264 @@
+#include<stdio.h>
+#include<stdlib.h>
+// define the node
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head = NULL;
+struct node *newNode, *temp;
+struct node *createLinkedList()
+{
+    int ch;
+    while (1)
+    {
+        newNode = (struct node *)malloc(sizeof(struct node)); // dynamic mempory allocate
+        printf("Enter the data: ");
+        scanf("%d", &newNode->data);
+        newNode->next = 0;
+        // head=newNode;
+        if (head == NULL)
+        {
+            // head = newNode;
+            head = temp = newNode;
+        }
+        else
+        {
+            // head->next = newNode;
+            temp->next = newNode;
+            temp = newNode;
+        }
+
+        printf("Do you want to continue then hit (0 or 1)");
+        scanf("%d", &ch); // 1 = True 0 = false
+
+        if (ch == 0)
+        {
+            break;
+        }
+    }
+    return head;
+}
+
+//code to delete a node at the beginning of a linked list
+struct node *deleteAtBeginning()
+{
+   if(head==NULL)
+   {
+       printf("List is empty");
+   }
+   else
+   {
+       temp=head;
+       head=head->next;
+       free(temp);
+   }
+}
+
+//code to delete a node at the end of a linked list
+struct node *deleteAtEnd()
+{
+    struct node *pre;
+    if(head==NULL)
+    {
+        printf("List is empty");
+    }
+    else
+    {
+        temp=head;
+        while(temp->next!=NULL)
+        {
+            pre=temp;
+            temp=temp->next;
+        }
+        if(temp==head)
+        {
+            head=NULL;
+        }
+        else
+        {
+            pre->next=NULL;
+        }
+        free(temp);
+    }
+}
+
+//code to delete a node at the given position of a linked list
+struct node *deleteAtGivenPosition()
+{
+    struct node *nextNode;
+    int pos,i=1;
+    printf("Enter the position: ");
+    scanf("%d",&pos);
+    temp=head;
+    while(i<pos-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    nextNode=temp->next;
+    temp->next=nextNode->next;
+    free(nextNode);
+    
+}
+//traverse the linked list
+void traverseLinkedList(struct node *head)
+{
+    struct node *ptr;
+    ptr = head;
+    while (ptr != NULL)
+    {
+        printf("%d ", ptr->data);
+        ptr = ptr->next;
+    }
+}
+
+//
+int main()
+{
+    createLinkedList();
+    traverseLinkedList(head);
+    printf("\n");
+    /*deleteAtBeginning();
+    traverseLinkedList(head);*/
+    printf("\n");
+    deleteAtEnd();
+    traverseLinkedList(head);
+    printf("\n");
+    deleteAtGivenPosition();
+    traverseLinkedList(head);
+    return 0;
+}
+
+
+/////////////
+#include <stdio.h>
+#include <stdlib.h>
+// define the node
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head = NULL;
+struct node *newNode, *temp;
+struct node *createLinkedList()
+{
+    int ch;
+    while (1)
+    {
+        newNode = (struct node *)malloc(sizeof(struct node)); // dynamic mempory allocate
+        printf("Enter the data: ");
+        scanf("%d", &newNode->data);
+        newNode->next = 0;
+        // head=newNode;
+        if (head == NULL)
+        {
+            // head = newNode;
+            head = temp = newNode;
+        }
+        else
+        {
+            // head->next = newNode;
+            temp->next = newNode;
+            temp = newNode;
+        }
+
+        printf("Do you want to continue then hit (0 or 1)");
+        scanf("%d", &ch); // 1 = True 0 = false
+
+        if (ch == 0)
+        {
+            break;
+        }
+    }
+    return head;
+}
+
+// code to insert a node ate the beginning of a linked list
+struct node *insertAtBeginning()
+{
+    newNode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d", &newNode->data);
+    newNode->next = head;
+    head = newNode;
+    return head;
+}
+
+// code to insert a node ate the end of a linked list
+struct node *insertAtEnd()
+{
+    newNode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d", &newNode->data);
+    newNode->next = NULL;
+    temp = head;
+    if (temp == NULL)
+    {
+        head = newNode;
+    }
+    else
+    {
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    return head;
+}
+
+// code to insert a node ate any position of a linked list
+struct node *insertAtAnyPosition()
+{
+    int pos, i = 1;
+    newNode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d", &newNode->data);
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+    temp = head;
+    if (pos == 1)
+    {
+        newNode->next = head;
+        head = newNode;
+        return head;
+    }
+    else
+    {
+        while (i < pos) // (i<pos) for insert after the position
+        {
+            temp = temp->next;
+            i++;
+        }
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+    return head;
+}
+
+// code to traverse a linked list
+void traverseLinkedList(struct node *head)
+{
+    temp = head;
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}
+int main()
+{
+    struct node *head;
+    head = createLinkedList();
+    traverseLinkedList(head);
+    head = insertAtBeginning();
+    traverseLinkedList(head);
+    head = insertAtEnd();
+    traverseLinkedList(head);
+    head = insertAtAnyPosition();
+    traverseLinkedList(head);
+    return 0;
+}
