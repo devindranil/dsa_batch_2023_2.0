@@ -1,0 +1,335 @@
+#include <stdio.h>
+#include <stdlib.h>
+// define the node
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *head = NULL;
+struct node *newNode, *tail, *temp;
+struct node *createDoublyLinkedList()
+{
+    int ch;
+    while (1)
+    {
+        newNode = (struct node *)malloc(sizeof(struct node)); // dynamic mempory allocate
+        printf("Enter the data: ");
+        scanf("%d", &newNode->data);
+        newNode->next = NULL;
+        newNode->prev = NULL;
+        if (head == NULL)
+        {
+            head = tail = newNode;
+        }
+        else
+        {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+
+        printf("Do you want to continue then hit (0 or 1)");
+        scanf("%d", &ch); // 1 = True 0 = false
+
+        if (ch == 0)
+        {
+            break;
+        }
+    }
+    return head;
+}
+
+// insert at beginning
+struct node *insertAtBeg()
+{
+    newNode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d", &newNode->data);
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    // logic
+    if (head == 0)
+    {
+        head = tail = newNode;
+    }
+    else
+    {
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
+    return head;
+}
+// insert at end
+struct node *insertAtEnd()
+{
+    newNode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d", &newNode->data);
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    // logic
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
+    return head;
+}
+// sizeOfLinkedList()
+int sizeOfLinkedList()
+{
+    int count = 0;
+    temp = head;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+// insert at any position
+struct node *insertAtAnyPosition()
+{
+    int pos, i = 1, count;
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+    // if position is -ve or above the size of linked list
+    if (pos <= 0 || pos > (count = sizeOfLinkedList()))
+    {
+        printf("Invalid position\n");
+    }
+    else if (pos == 1)
+    {
+        insertAtBeg();
+    }
+    else
+    {
+        newNode = (struct node *)malloc(sizeof(struct node));
+        printf("Enter the data: ");
+        scanf("%d", &newNode->data);
+        newNode->prev = NULL;
+        newNode->next = NULL;
+        // logic
+        temp = head;
+        while (i < pos)
+        {
+            temp = temp->next;
+            i++;
+        }
+        newNode->prev = temp;
+        newNode->next = temp->next;
+        temp->next = newNode;
+        newNode->next->prev = newNode;
+    }
+    return head;
+}
+
+// sizeOfLinkedList()
+int sizeOfLinkedList(){
+    int count=0;
+    temp=head;
+    while(temp!=NULL){
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+//insert at any position
+struct node *insertAtAnyPosition(){
+    int pos, i=1,count;
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+    //if position is -ve or above the size of linked list
+    if(pos<=0 || pos>(count=sizeOfLinkedList())){
+        printf("Invalid position\n");
+    }
+    else if(pos==1){
+        insertAtBeg();
+    }
+    else{
+        newNode = (struct node*)malloc(sizeof(struct node));
+        printf("Enter the data: ");
+        scanf("%d", &newNode->data);
+        newNode->prev=NULL;
+        newNode->next=NULL;
+        //logic
+        temp=head;
+        while(i<pos){
+            temp=temp->next;
+            i++;
+        }
+       newNode->prev= temp;
+       newNode->next = temp->next;
+       temp->next=newNode;
+       newNode->next->prev=newNode;
+    }
+    return head;
+}
+//forward direction
+void traverseLinkedList(struct node *head){
+    struct node *ptr = head;
+    while(ptr!=NULL)
+    {
+        printf("%d ", ptr->data);
+        ptr = ptr->next;
+    }
+    printf("\n");
+}
+//backward direction
+void reverseTraverseLinkedList(struct node *head){
+    struct node *ptr = head;
+    while(ptr->next!=NULL)
+    {
+        ptr = ptr->next;
+    }
+    while(ptr!=NULL)
+    {
+        printf("%d ", ptr->data);
+        ptr = ptr->prev;
+    }
+}
+int main()
+{
+    struct node *head;
+    head = createDoublyLinkedList();
+    printf("Forward direction:\n");
+    traverseLinkedList(head);
+    head = insertAtBeg();
+    printf("after insert at beginning:\n");
+    traverseLinkedList(head);
+    head = insertAtEnd();
+    printf("after insert at end:\n");
+    traverseLinkedList(head);
+    head = insertAtAnyPosition();
+    printf("after insert at any position:\n");
+    traverseLinkedList(head);
+
+    /*printf("Backward direction:\n");
+    reverseTraverseLinkedList(head);*/
+    return 0;
+}
+
+
+-----------------------------
+#include <stdio.h>
+#include <stdlib.h>
+// define the node
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *head = NULL;
+struct node *newNode, *tail, *temp;
+struct node *createDoublyLinkedList(){
+    int ch;
+    while (1)
+    {
+        newNode = (struct node *)malloc(sizeof(struct node)); // dynamic mempory allocate
+        printf("Enter the data: ");
+        scanf("%d", &newNode->data);
+        newNode->next=NULL;
+        newNode->prev=NULL;
+        if (head == NULL)
+        {
+            head=tail=newNode;
+        }
+        else
+        {
+            tail->next=newNode;
+            newNode->prev=tail;
+            tail=newNode;
+        }
+
+        printf("Do you want to continue then hit (0 or 1)");
+        scanf("%d",&ch); //1 = True 0 = false
+
+        if(ch==0){
+            break;
+        }
+    }
+    return head;
+
+}
+
+// delete from beginning
+void deleteFormBeg(){
+    temp=head;
+    head=head->next;
+    head->prev=NULL;
+    free(temp);
+}
+
+// delete from end
+void deleteFromEnd(){
+    temp=tail;
+    tail->prev->next=NULL;
+    tail=tail->prev;
+    free(temp);
+}
+// length of linked list
+int length(){
+    int count=0;
+    temp=head;
+    while (temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+
+//delete from any position
+void deleteFromAnyPosition(){
+    int pos, i=1,count;
+    printf("Enter the position: ");
+    scanf("%d",&pos);
+    temp=head;
+    if(pos==1){
+        deleteFormBeg();
+    }else if(pos<=0 || pos>(count=length())){
+        printf("Invalid position");
+        exit(0);
+    }else if(pos==(count=length())){
+        deleteFromEnd();
+    }else{
+        while (i<pos)
+        {
+            temp=temp->next;
+            i++;
+        }
+        temp->prev->next=tail;
+        temp->next->prev=temp->prev;
+        free(temp);
+    }
+}
+void traverseLinkedList(struct node *head){
+    temp=head;
+    while (temp!=NULL)
+    {
+        printf("%d\n",temp->data);
+        temp=temp->next;
+    }
+    
+}
+
+int main()
+{
+    head = createDoublyLinkedList();
+    printf("Forward direction:\n");
+    traverseLinkedList(head);
+    /*printf("After deletion from beginning:\n");
+    deleteFormBeg();
+    traverseLinkedList(head);
+    printf("After deletion from end:\n");
+    deleteFromEnd();
+    traverseLinkedList(head);*/
+    printf("After deletion from any position:\n");
+    deleteFromAnyPosition();
+    traverseLinkedList(head);
+
+
+    return 0;
+}
