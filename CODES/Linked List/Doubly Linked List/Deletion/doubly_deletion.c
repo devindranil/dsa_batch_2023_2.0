@@ -42,7 +42,7 @@ struct node *createDoublyLinkedList()
     return head;
 }
 // delte form beginning
-void deleteFormBeg()
+/*void deleteFormBeg()
 {
     if (head == NULL)
     {
@@ -53,6 +53,27 @@ void deleteFormBeg()
         temp = head;
         head = head->next;
         head->prev = NULL;
+        free(temp);
+    }
+}*/
+void deleteFormBeg()
+{
+    if (head == NULL)
+    {
+        printf("List is empty");
+    }
+    else
+    {
+        temp = head;
+        head = head->next;
+        if (head != NULL)
+        {
+            head->prev = NULL;
+        }
+        else
+        {
+            tail = NULL;  // Update tail when the list becomes empty
+        }
         free(temp);
     }
 }
@@ -84,57 +105,37 @@ int length()
     return count;
 }
 //delte at any position
-/*void deleteAtAnyPos(){
-    int pos, i=1, count;
-    temp=head;
-    printf("Enter the position: ");
-    scanf("%d",&pos);
-    if(pos==1){
-        deleteFormBeg();
-    }else if(pos<=0 || pos>(count=length())){
-        printf("Invalid position");
-        exit(0);
-    }else if(pos==(count=length())){
-        deleteLastNode();
-    }else{
-        //at any pos excluding 1st and last
-        while(i<pos){
-            temp=temp->next;
-            i++;
-        }
-        temp->prev->next=tail;
-        temp->next->prev=temp->prev;
-        free(temp);
-    }
-}*/
-/*void deleteFromAnyPosition() {
-    int pos, i = 1, count;
+void deleteAtAnyPos()
+{
+    int pos, i = 1;
     printf("Enter the position: ");
     scanf("%d", &pos);
-    temp = head;
-
-    if (pos == 1) {
-        deleteFormBeg();
-    } else {
-        count = length();
-
-        if (pos <= 0 || pos > count) {
-            printf("Invalid position\n");
-            return;
-        } else if (pos == count) {
-            deleteLastNode();
-        } else {
-            while (i < pos) {
-                temp = temp->next;
-                i++;
-            }
-
-            temp->prev->next = temp->next;
-            temp->next->prev = temp->prev;
-            free(temp);
-        }
+    if (pos < 1 || pos > length())
+    {
+        printf("Invalid position! Please enter position between 1 to %d", length());
     }
-}*/
+    else if (pos == 1)
+    {
+        deleteFormBeg();
+    }
+    else if (pos == length())
+    {
+        deleteLastNode();
+    }
+    else
+    {
+        temp = head;
+        while (i < pos)
+        {
+            temp = temp->next;
+            i++;
+        }
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        free(temp);
+    }
+}
+
 
 // forward direction
 void traverseLinkedList(struct node *head)
@@ -157,7 +158,7 @@ int main()
     printf("After deleting the beginning node:\n");
     traverseLinkedList(head);*/
     printf("After deleting at any pos node:\n");
-    deleteFromAnyPosition();
+    deleteAtAnyPos();
     traverseLinkedList(head);
     return 0;
 }
