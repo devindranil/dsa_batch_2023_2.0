@@ -42,20 +42,6 @@ struct node *createDoublyLinkedList()
     return head;
 }
 // delte form beginning
-/*void deleteFormBeg()
-{
-    if (head == NULL)
-    {
-        printf("List is empty");
-    }
-    else
-    {
-        temp = head;
-        head = head->next;
-        head->prev = NULL;
-        free(temp);
-    }
-}*/
 void deleteFormBeg()
 {
     if (head == NULL)
@@ -112,7 +98,7 @@ void deleteAtAnyPos()
     scanf("%d", &pos);
     if (pos < 1 || pos > length())
     {
-        printf("Invalid position! Please enter position between 1 to %d", length());
+        printf("Invalid position! Please enter position between 1 to %d\n", length());
     }
     else if (pos == 1)
     {
